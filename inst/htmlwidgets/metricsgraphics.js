@@ -184,23 +184,26 @@ HTMLWidgets.widget({
         var parentDom = document.querySelector(mg_params.target);
 
         for (var i=0; i<n; i++) {
+
+          mg_params_copy = $.extend(true, {}, mg_params);
+
           var y_accessor = params.y_accessor[i];
           var div = document.createElement("div");
           div.id = y_accessor;
           div.style.float = "left";
           parentDom.appendChild(div);
 
-          mg_params.data   = wide[i];
-          mg_params.target = "#" + y_accessor;
+          mg_params_copy.data   = wide[i];
+          mg_params_copy.target = "#" + y_accessor;
 
           // add titles instead of legends
-          if (mg_params.legend instanceof Array){
-            mg_params.title = params.legend[i];
+          if (mg_params_copy.legend instanceof Array){
+            mg_params_copy.title = params.legend[i];
           }
-          mg_params.legend_target = null;
+          mg_params_copy.legend_target = null;
 
           //draw a separate chart
-          MG.data_graphic(mg_params);
+          MG.data_graphic(mg_params_copy);
         }
 
       }
